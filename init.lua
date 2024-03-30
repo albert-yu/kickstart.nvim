@@ -595,9 +595,7 @@ local servers = {
   tsserver = {},
   zls = {},
   html = { filetypes = { 'html', 'twig', 'hbs'} },
-  -- pyright = {},
-  -- rust_analyzer = {},
-  -- tsserver = {},
+  wgsl_analyzer = {},
 
   lua_ls = {
     Lua = {
