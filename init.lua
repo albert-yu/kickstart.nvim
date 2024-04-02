@@ -220,11 +220,11 @@ require('lazy').setup({
     -- See `:help lualine.txt`
     opts = {
       options = {
-        icons_enabled = false,
+        icons_enabled = true,
         theme = 'onedark',
         options = {
-          section_separators = { left = '', right = '' },
-          component_separators = { left = '', right = '' }
+          component_separators = { left = '', right = ''},
+          section_separators = { left = '', right = ''},
         }
       },
     },
