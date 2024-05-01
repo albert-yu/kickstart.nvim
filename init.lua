@@ -593,6 +593,7 @@ local servers = {
   pyright = {},
   rust_analyzer = {},
   tsserver = {},
+  zls = {},
   html = { filetypes = { 'html', 'twig', 'hbs'} },
   wgsl_analyzer = {},
 
@@ -629,13 +630,6 @@ mason_lspconfig.setup_handlers {
       filetypes = (servers[server_name] or {}).filetypes,
     }
   end,
-}
-
-require'lspconfig'.zls.setup{
-  capabilities = capabilities,
-  on_attach = on_attach,
-  cmd = { 'zls' },
-  filetypes = { 'zig' },
 }
 
 -- [[ Configure nvim-cmp ]]
