@@ -593,7 +593,14 @@ require('lazy').setup({
         gopls = {},
         pyright = {},
         rust_analyzer = {},
-        tsserver = {},
+        tsserver = {
+          init_options = {
+            hostInfo = "neovim",
+            preferences = {
+              importModuleSpecifierPreference = 'non-relative',
+            },
+          },
+        },
         zls = {},
         html = { filetypes = { 'html', 'twig', 'hbs'} },
         wgsl_analyzer = {},
