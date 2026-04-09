@@ -807,8 +807,24 @@ require('lazy').setup({
     dependencies = { 'rktjmp/lush.nvim' },
     priority = 1000, -- Make sure to load this before all the other start plugins.
     config = function()
-      vim.o.background = 'light'
+      local function is_dark_mode()
+        local handle = io.popen('defaults read -g AppleInterfaceStyle 2>/dev/null')
+        local result = handle:read('*a')
+        handle:close()
+        return result:find('Dark') ~= nil
+      end
+
+      vim.o.background = is_dark_mode() and 'dark' or 'light'
       vim.cmd.colorscheme 'zenbones'
+
+      vim.api.nvim_create_autocmd('FocusGained', {
+        callback = function()
+          local bg = is_dark_mode() and 'dark' or 'light'
+          if vim.o.background ~= bg then
+            vim.o.background = bg
+          end
+        end,
+      })
     end,
   },
 
