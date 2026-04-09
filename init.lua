@@ -815,8 +815,7 @@ require('lazy').setup({
     -- change the command in the config to whatever the name of that colorscheme is.
     --
     -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-    'zenbones-theme/zenbones.nvim',
-    dependencies = { 'rktjmp/lush.nvim' },
+    'rebelot/kanagawa.nvim',
     priority = 1000, -- Make sure to load this before all the other start plugins.
     config = function()
       local function is_dark_mode()
@@ -826,14 +825,17 @@ require('lazy').setup({
         return result:find('Dark') ~= nil
       end
 
+      require('kanagawa').setup {}
       vim.o.background = is_dark_mode() and 'dark' or 'light'
-      vim.cmd.colorscheme 'zenbones'
+      vim.cmd.colorscheme 'kanagawa'
 
       vim.api.nvim_create_autocmd('FocusGained', {
         callback = function()
-          local bg = is_dark_mode() and 'dark' or 'light'
+          local dark = is_dark_mode()
+          local bg = dark and 'dark' or 'light'
           if vim.o.background ~= bg then
             vim.o.background = bg
+            vim.cmd.colorscheme 'kanagawa'
           end
         end,
       })
