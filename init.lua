@@ -608,8 +608,20 @@ require('lazy').setup({
         -- Some languages (like typescript) have entire language plugins that can be useful:
         --    https://github.com/pmizio/typescript-tools.nvim
         --
-        -- tsgo is the native TypeScript LSP from the TypeScript team
-        tsgo = {},
+        ts_ls = {
+          init_options = {
+            preferences = {
+              includePackageJsonAutoImports = 'on',
+            },
+          },
+          settings = {
+            typescript = {
+              preferences = {
+                importModuleSpecifier = 'non-relative',
+              },
+            },
+          },
+        },
 
         stylua = {}, -- Used to format Lua code
 
