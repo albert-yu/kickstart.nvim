@@ -613,15 +613,11 @@ require('lazy').setup({
         -- Some languages (like typescript) have entire language plugins that can be useful:
         --    https://github.com/pmizio/typescript-tools.nvim
         --
-        ts_ls = {
-          init_options = {
-            preferences = {
-              includePackageJsonAutoImports = 'on',
-            },
-          },
+        tsgo = {
           settings = {
             typescript = {
               preferences = {
+                includePackageJsonAutoImports = 'on',
                 importModuleSpecifier = 'non-relative',
               },
             },
