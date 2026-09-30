@@ -803,6 +803,7 @@ require('lazy').setup({
         flavour = 'auto',
         background = { light = 'latte', dark = 'mocha' },
         transparent_background = true,
+        no_italic = true,
         float = { transparent = false, solid = true },
         integrations = {
           blink_cmp = true,
