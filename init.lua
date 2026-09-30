@@ -788,7 +788,8 @@ require('lazy').setup({
     -- change the command in the config to whatever the name of that colorscheme is.
     --
     -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-    'folke/tokyonight.nvim',
+    'catppuccin/nvim',
+    name = 'catppuccin',
     priority = 1000, -- Make sure to load this before all the other start plugins.
     config = function()
       local function is_dark_mode()
@@ -798,16 +799,23 @@ require('lazy').setup({
         return result:find('Dark') ~= nil
       end
 
-      require('tokyonight').setup {
-        transparent = true,
-        styles = {
-          sidebars = 'transparent',
-          floats = 'dark',
+      require('catppuccin').setup {
+        flavour = 'auto',
+        background = { light = 'latte', dark = 'mocha' },
+        transparent_background = true,
+        float = { transparent = false, solid = true },
+        integrations = {
+          blink_cmp = true,
+          fidget = true,
+          gitsigns = true,
+          mini = { enabled = true },
+          telescope = { enabled = true },
+          which_key = true,
         },
       }
 
       vim.o.background = is_dark_mode() and 'dark' or 'light'
-      vim.cmd.colorscheme 'tokyonight'
+      vim.cmd.colorscheme 'catppuccin'
 
       vim.api.nvim_create_autocmd('FocusGained', {
         callback = function()
