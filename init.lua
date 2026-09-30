@@ -163,6 +163,8 @@ vim.o.confirm = true
 
 vim.o.winborder = 'rounded'
 
+vim.g.loaded_matchparen = 1
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
