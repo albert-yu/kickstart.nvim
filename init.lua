@@ -219,6 +219,18 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
 -- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
 
+vim.api.nvim_create_user_command('Bdo', function()
+  local current = vim.api.nvim_get_current_buf()
+  local skipped = {}
+  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+    if buf ~= current and vim.bo[buf].buflisted then
+      if not pcall(vim.cmd.bdelete, buf) then table.insert(skipped, vim.fn.bufname(buf)) end
+    end
+  end
+  if #skipped > 0 then vim.notify('Skipped buffers: ' .. table.concat(skipped, ', '), vim.log.levels.WARN) end
+end, { desc = 'Delete all buffers except the current one' })
+vim.keymap.set('ca', 'bdo', function() return (vim.fn.getcmdtype() == ':' and vim.fn.getcmdline() == 'bdo') and 'Bdo' or 'bdo' end, { expr = true })
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
