@@ -645,7 +645,7 @@ require('lazy').setup({
       -- You can press `g?` for help in this menu.
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
-        -- You can add other tools here that you want Mason to install
+        'biome',
       })
 
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
@@ -669,6 +669,18 @@ require('lazy').setup({
         desc = '[F]ormat buffer',
       },
     },
+    init = function()
+      vim.api.nvim_create_autocmd('FileType', {
+        group = vim.api.nvim_create_augroup('javascript-typescript-indent', { clear = true }),
+        pattern = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
+        callback = function(event)
+          vim.bo[event.buf].expandtab = true
+          vim.bo[event.buf].shiftwidth = 2
+          vim.bo[event.buf].softtabstop = 2
+          vim.bo[event.buf].tabstop = 2
+        end,
+      })
+    end,
     ---@module 'conform'
     ---@type conform.setupOpts
     opts = {
@@ -680,10 +692,6 @@ require('lazy').setup({
         local disable_filetypes = {
           c = true,
           cpp = true,
-          javascript = true,
-          javascriptreact = true,
-          typescript = true,
-          typescriptreact = true,
         }
         if disable_filetypes[vim.bo[bufnr].filetype] then
           return nil
@@ -695,7 +703,11 @@ require('lazy').setup({
         end
       end,
       formatters_by_ft = {
+        javascript = { 'biome' },
+        javascriptreact = { 'biome' },
         lua = { 'stylua' },
+        typescript = { 'biome' },
+        typescriptreact = { 'biome' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
