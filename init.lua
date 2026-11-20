@@ -234,6 +234,13 @@ vim.keymap.set('ca', 'bdo', function() return (vim.fn.getcmdtype() == ':' and vi
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
+vim.filetype.add {
+  extension = {
+    mdx = 'mdx',
+  },
+}
+vim.treesitter.language.register('markdown', 'mdx')
+
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
 --  See `:help vim.hl.on_yank()`
@@ -591,6 +598,7 @@ require('lazy').setup({
       local servers = {
         clangd = {},
         gopls = {},
+        mdx_analyzer = {},
         ty = {},
         rust_analyzer = {},
         wgsl_analyzer = {},
@@ -708,6 +716,7 @@ require('lazy').setup({
         javascriptreact = { 'biome' },
         lua = { 'stylua' },
         markdown = { 'prettier' },
+        mdx = { 'prettier' },
         typescript = { 'biome' },
         typescriptreact = { 'biome' },
         -- Conform can also run multiple formatters sequentially
