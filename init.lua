@@ -593,6 +593,7 @@ require('lazy').setup({
         gopls = {},
         ty = {},
         rust_analyzer = {},
+        wgsl_analyzer = {},
         tsc = {
           settings = {
             typescript = {
